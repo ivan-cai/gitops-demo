@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: demo-test-registry.cn-hangzhou.cr.aliyuncs.com/cidemo/echo-server 
+  repository: demo-test2-registry.cn-hangzhou.cr.aliyuncs.com/test/echo-server-test
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v2"
+  tag: "v1cicd-test-1a4bd9"
 
 imagePullSecrets: []
 nameOverride: ""
