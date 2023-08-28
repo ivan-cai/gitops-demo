@@ -23,6 +23,9 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+rollout:
+  enabled: false
+
 podAnnotations: {}
 
 podSecurityContext: {}
@@ -43,7 +46,7 @@ service:
   port: 8080
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
