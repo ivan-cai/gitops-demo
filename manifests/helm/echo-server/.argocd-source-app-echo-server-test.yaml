@@ -4,5 +4,5 @@ helm:
     value: demo-test2-registry.cn-hangzhou.cr.aliyuncs.com/test/echo-server-test
     forcestring: true
   - name: image.tag
-    value: v2
+    value: v4
     forcestring: true
