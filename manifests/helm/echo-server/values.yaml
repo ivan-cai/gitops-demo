@@ -24,7 +24,7 @@ serviceAccount:
   name: ""
 
 rollout:
-  enabled: false
+  enabled: true
 
 podAnnotations: {}
 
