@@ -10,5 +10,5 @@ helm:
     value: demo-test-registry.cn-hangzhou.cr.aliyuncs.com/cidemo/echo-web-server
     forcestring: true
   - name: image.echoWebServer.tag
-    value: v3-5a7147
+    value: v2.1-7063c583
     forcestring: true
