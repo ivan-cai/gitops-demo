@@ -4,7 +4,7 @@ helm:
     value: demo-test-registry.cn-hangzhou.cr.aliyuncs.com/cidemo/echo-server
     forcestring: true
   - name: image.echoServer.tag
-    value: v2.1
+    value: v2-argo
     forcestring: true
   - name: image.echoWebServer.repository
     value: demo-test-registry.cn-hangzhou.cr.aliyuncs.com/cidemo/echo-web-server
