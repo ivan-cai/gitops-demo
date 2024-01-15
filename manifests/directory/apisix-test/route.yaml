@@ -1,0 +1,22 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixRoute
+metadata:
+  name: httpbin-route
+spec:
+  http:
+    - name: route-1
+      match:
+        hosts:
+          - httpbin.org
+        paths:
+          - /*
+      backends:
+        - serviceName: httpbin
+          servicePort: 80
+      timeout:
+        connect: 10s
+        send: 15s
+        read: 15s
+      upstreams:
+        - name: paas-k8s-demo
+      websocket: true

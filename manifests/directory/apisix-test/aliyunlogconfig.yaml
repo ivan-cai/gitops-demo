@@ -1,0 +1,18 @@
+apiVersion: log.alibabacloud.com/v1alpha1
+kind: AliyunLogConfig
+metadata:
+  name: gitops-argocd-sls-config
+  namespace: argocd
+spec:
+  lifeCycle: 5
+  logstore: gitops-argocd-logstore
+  logtailConfig:
+    inputType: plugin
+    configName: gitops-argocd-sls-config
+    inputDetail:
+      plugin:
+        inputs:
+          - detail:
+              Stderr: true
+              Stdout: true
+            type: service_docker_stdout
