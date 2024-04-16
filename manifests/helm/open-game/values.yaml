@@ -4,3 +4,6 @@ sidecarImage: registry.cn-hangzhou.aliyuncs.com/gs-demo/sidecar:v0.1 # 可被更
 
 # 每个地域数量有差异
 replicas: 2
+
+scaled:
+  enabled: true
