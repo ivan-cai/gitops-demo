@@ -1,0 +1,8 @@
+helm:
+  parameters:
+  - name: image.repository
+    value: test-registry.cn-hongkong.cr.aliyuncs.com/acs/echo-server
+    forcestring: true
+  - name: image.tag
+    value: v1.0.0-18b52d8
+    forcestring: true
