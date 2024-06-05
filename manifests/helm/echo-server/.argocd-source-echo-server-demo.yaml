@@ -4,5 +4,5 @@ helm:
     value: test-registry.cn-hongkong.cr.aliyuncs.com/acs/echo-server
     forcestring: true
   - name: image.tag
-    value: v1.0.0-8f2f80a
+    value: v1.0.0-49977ea
     forcestring: true
