@@ -7,19 +7,13 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - clusters: {}
-#        selector:
-#          matchExpressions:
-#            - key: argocd.argoproj.io/secret-type
-#              operator: In
-#              values:
-#                - cluster
-#            - key: cluster_name
-#              operator: NotIn
-#              values:
-#                - in-cluster
-#          matchLabels:
-#            argocd.argoproj.io/secret-type: cluster
+    - clusters:
+        selector:
+          matchExpressions:
+            - key: name
+              operator: NotIn
+              values:
+                - in-cluster
   syncPolicy:
     preserveResourcesOnDeletion: true
   template:
