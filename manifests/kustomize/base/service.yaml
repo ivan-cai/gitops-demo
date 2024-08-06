@@ -5,6 +5,7 @@ metadata:
     app.kubernetes.io/instance: echo-server
     app.kubernetes.io/name: echo-server
   name: echo-server
+  namespace: demo123
 spec:
   ports:
   - name: http
