@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  labels:
+    app.kubernetes.io/instance: traefik-middlewares-test
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: traefik-middlewares
+    app.kubernetes.io/version: "1.0"
+    helm.sh/chart: traefik-middlewares-1.0
+  name: add-namespace-response-header
+  namespace: test
+spec:
+  headers:
+    customResponseHeaders:
+      X7-Resp-Env: test
