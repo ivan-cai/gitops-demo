@@ -1,0 +1,163 @@
+apiVersion: apps.emqx.io/v2beta1
+kind: EMQX
+metadata:
+  annotations:
+    apps.emqx.io/last-emqx-configuration: |2
+
+      listeners.ssl.default {
+          enable = false
+      }
+
+      listeners.wss.default {
+          enable = false
+      }
+  labels:
+    app.kubernetes.io/instance: emqx5-test
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: emqx5
+    helm.sh/chart: emqx5-5.3.2
+  name: emqx5-test
+  namespace: tool
+spec:
+  clusterDomain: cluster.local
+  config:
+    data: |2
+
+      listeners.ssl.default {
+          enable = false
+      }
+
+      listeners.wss.default {
+          enable = false
+      }
+    mode: Merge
+  coreTemplate:
+    metadata: {}
+    spec:
+      containerSecurityContext:
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      env:
+      - name: ALIYUN_LOGTAIL_USER_DEFINED_ID
+        value: emqx5-test
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /status
+          port: dashboard
+        initialDelaySeconds: 60
+        periodSeconds: 30
+      podSecurityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        runAsGroup: 1000
+        runAsUser: 1000
+        supplementalGroups:
+        - 1000
+      readinessProbe:
+        failureThreshold: 12
+        httpGet:
+          path: /status
+          port: dashboard
+        initialDelaySeconds: 10
+        periodSeconds: 5
+      replicas: 2
+      resources:
+        limits:
+          cpu: "1"
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+      volumeClaimTemplates:
+        accessModes:
+        - ReadWriteMany
+        resources:
+          requests:
+            storage: 1Gi
+        storageClassName: nas
+  dashboardServiceTemplate:
+    enabled: true
+    metadata:
+      labels:
+        apps.emqx.io/name: emqx5-test-dashboard
+    spec:
+      type: ClusterIP
+  image: x7sy-registry-vpc.cn-hangzhou.cr.aliyuncs.com/x7-base-common/emqx:5.3.2
+  imagePullPolicy: IfNotPresent
+  imagePullSecrets:
+  - name: emqx5-test-imagepullsecret
+  listenersServiceTemplate:
+    enabled: true
+    metadata:
+      annotations:
+        service.beta.kubernetes.io/alibaba-cloud-loadbalancer-id: lb-bp1qhfmvprzqxr8tapdle
+    spec:
+      ports:
+      - name: tcp-default
+        port: 11883
+        protocol: TCP
+        targetPort: 1883
+      - name: ws-default
+        port: 18083
+        protocol: TCP
+        targetPort: 8083
+      type: LoadBalancer
+  replicantTemplate:
+    metadata: {}
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: ack.x7.com/nodepool-type
+                operator: In
+                values:
+                - tool
+            weight: 1
+      containerSecurityContext:
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      env:
+      - name: ALIYUN_LOGTAIL_USER_DEFINED_ID
+        value: emqx5-test
+      livenessProbe:
+        failureThreshold: 3
+        httpGet:
+          path: /status
+          port: dashboard
+        initialDelaySeconds: 60
+        periodSeconds: 30
+      podSecurityContext:
+        fsGroup: 1000
+        fsGroupChangePolicy: Always
+        runAsGroup: 1000
+        runAsUser: 1000
+        supplementalGroups:
+        - 1000
+      readinessProbe:
+        failureThreshold: 12
+        httpGet:
+          path: /status
+          port: dashboard
+        initialDelaySeconds: 10
+        periodSeconds: 5
+      replicas: 3
+      resources:
+        limits:
+          cpu: "1"
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 256Mi
+  revisionHistoryLimit: 3
+  updateStrategy:
+    evacuationStrategy:
+      connEvictRate: 1000
+      sessEvictRate: 1000
+      waitTakeover: 10
+    initialDelaySeconds: 10
+    type: Recreate
