@@ -4,6 +4,7 @@ metadata:
   labels:
     app: web-demo
     a: d
+    b: c
   name: web-demo
   namespace: {{ .Release.Namespace }}
 spec:
