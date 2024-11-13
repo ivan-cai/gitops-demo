@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: web-demo
-    a: b
+    a: c
   name: web-demo
   namespace: {{ .Release.Namespace }}
 spec:
