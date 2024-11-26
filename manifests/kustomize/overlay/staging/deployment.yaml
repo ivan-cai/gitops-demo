@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: echo-server
   labels:
-    a: z
+    a: zz
 spec:
   template:
     spec:
