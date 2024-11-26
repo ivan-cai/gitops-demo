@@ -4,6 +4,7 @@ metadata:
   name: echo-server
   labels:
     a: c
+    b: d
 spec:
   template:
     spec:
