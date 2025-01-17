@@ -4,7 +4,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: echo-server
     app.kubernetes.io/name: echo-server
-    a: b
   name: echo-server
 spec:
   replicas: 1
