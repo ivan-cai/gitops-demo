@@ -1,0 +1,21 @@
+---
+# Source: echo-server/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "echo-server-test-connection"
+  labels:
+    helm.sh/chart: echo-server-0.1.0
+    app.kubernetes.io/name: echo-server
+    app.kubernetes.io/instance: echo-server
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['echo-server:8080']
+  restartPolicy: Never
