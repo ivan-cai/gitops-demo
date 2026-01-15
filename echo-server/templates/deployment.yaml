@@ -29,7 +29,7 @@ spec:
         - name: echo-server
           securityContext:
             {}
-          image: "registry.cn-hangzhou.aliyuncs.com/haoshuwei24/echo-server:v1.0.0-a44a3c"
+          image: "demo-registry.cn-hongkong.cr.aliyuncs.com/demo/echo-server:v1.0.0-a44a3c"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
