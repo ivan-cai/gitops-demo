@@ -1,7 +1,7 @@
 # 容灾用独立 Application(纯增量):只把 echo-server 下发到容灾集群
 # 说明:
 # - 生产 Application 与 manifests/directory/echoserver/ 目录零改动
-# - 本文件放在 echoserver-dr/ 同步路径之外,避免被递归下发到业务集群
+# - 工作负载 overlay 在 dr/echo-server/,本 Application 文件放在同步路径之外
 # - 应用到 argocd 所在集群: kubectl apply -f 本文件
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -11,15 +11,14 @@ metadata:
 spec:
   project: "default"
   source:
-    repoURL: https://github.com/AliyunContainerService/gitops-demo.git
-    targetRevision: main
-    path: manifests/directory/echoserver-dr
+    repoURL: https://github.com/ivan-cai/gitops-demo.git
+    targetRevision: test0721
+    path: manifests/directory/dr/echo-server
   destination:
-    # TODO: 替换为容灾集群在 argocd 中已注册的 server 地址(argocd cluster list 查看)
-    server: https://<DR_CLUSTER_APISERVER>:6443
-    # TODO: 与生产 echo-server 所在 namespace 保持一致
-    namespace: default
+    # TODO: 替换为容灾集群在 argocd 中已注册的 cluster name(argocd cluster list 查看)
+    name: <DR_CLUSTER_NAME>
+    # 与生产 echo-server 所在 namespace 保持一致
+    namespace: test
   syncPolicy:
-    automated: {}
     syncOptions:
       - CreateNamespace=true
